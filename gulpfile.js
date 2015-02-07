@@ -86,7 +86,8 @@ gulp.task('scripts', function () {
 
 gulp.task('watchScript', function () {
   plugins.watch('./app/js/**', function () {
-    gulp.start(['scripts', 'test-unit']);
+    //gulp.start('test-unit');
+    gulp.start('scripts');
   })
 });
 
@@ -105,7 +106,10 @@ gulp.task('cssmin', function () {
     .pipe(gulp.dest('app/css'));
 });
 
-gulp.task('test-unit', plugins.shell.task(['npm test']));
+gulp.task('test-unit', function () {
+    plugins.shell.task(['npm test'])
+  }
+);
 
 gulp.task('default',
   [

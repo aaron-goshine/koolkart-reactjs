@@ -1,23 +1,23 @@
 import React from 'react';
-import KoolStore from '../stores/KoolStore';
-import KoolProduct from '../components/KoolProduct';
+import ProductsStore from '../stores/ProductsStore';
+import ProductComponent from '../components/ProductComponent';
 import  _ from 'lodash';
 
-var KoolProductPanel = React.createClass({
+var ProductsPanel = React.createClass({
   getInitialState() {
     return this._getStateFromStore();
   },
   componentWillMount() {
-    KoolStore.addChangeListener(this._onChange);
+    ProductsStore.addChangeListener(this._onChange);
   },
   componentWillUnmount() {
-    KoolStore.removeChangeListener(this._onChange);
+    ProductsStore.removeChangeListener(this._onChange);
   },
   render() {
     return (
       <div className="panel-custom">
-        <header>
-          <h2>Inspired by Your Shopping Trends</h2>
+        <header className="panel-header">
+          <p><strong>Inspired by Your Shopping Trends</strong></p>
           <p>Your Recently Viewed Items and Featured Recommendations</p>
         </header>
         {this._renderItems()}
@@ -29,7 +29,7 @@ var KoolProductPanel = React.createClass({
     return table.map(item => {
       return <div className="row"> {
         item.map(unit => {
-          return <KoolProduct  className="col-xs-4 product-unit" item={unit} />;
+          return <ProductComponent  className="col-xs-4 product-unit" item={unit} />;
         })}</div>
     })
   },
@@ -39,8 +39,10 @@ var KoolProductPanel = React.createClass({
   },
   _getStateFromStore() {
     return {
-      items: KoolStore.getAll()
+      items: ProductsStore.getAll()
     }
   }
 });
-export default   KoolProductPanel;
+
+
+export default   ProductsPanel;

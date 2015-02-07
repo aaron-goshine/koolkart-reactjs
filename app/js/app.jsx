@@ -1,20 +1,20 @@
 import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import KoolProductPanel from './components/KoolProductPanel';
-import KartList from './components/KartList';
-import KartActionCreator from './actions/KartActionCreator'
+import ProductsPanel from './components/ProductsPanel';
+import BasketList from './components/BasketList';
+import AppActionCreator from './actions/AppActionCreator'
 
-var KartApp = React.createClass({
+var App = React.createClass({
   componentDidMount() {
-    KartActionCreator.init();
+    AppActionCreator.init();
   },
   render() {
     return (
-      <section >
-        <section id="main"  className="main-section">
-          <KoolProductPanel/>
-          <KartList/>
+      <section  id="main" >
+        <section className="main-section clearfix">
+          <ProductsPanel/>
+          <BasketList/>
         </section>
         <Footer/>
       </section>
@@ -22,7 +22,7 @@ var KartApp = React.createClass({
   }
 });
 React.render(
-  <KartApp />,
-  document.getElementById('kartApp')
+  <App/>,
+  document.getElementById('main-app')
 );
 

@@ -39,7 +39,9 @@
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "reqwest": "^1.1.5",
+    "string": "^3.0.0",
     "string-format": "^0.2.1",
+    "truncate": "^1.0.4",
     "vinyl-source-stream": "^1.0.0"
   },
   "jest": {

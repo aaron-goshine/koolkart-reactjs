@@ -1,12 +1,12 @@
 import React from 'react'
 import KartStore from '../stores/KartStore';
-import KartProduct from '../components/kartProduct';
+import BasketItem from '../components/BasketItem';
 import 'string-format';
 import numbr from 'numbr'
 import  {ModalTrigger,Modal} from 'react-bootstrap'
 
 
-var KartList = React.createClass({
+var BasketList= React.createClass({
   getInitialState() {
     return this._getStateFromStore();
   },
@@ -31,19 +31,22 @@ var KartList = React.createClass({
   _getCheckoutButton() {
     return (
       <ModalTrigger modal={this._getModal()} container={this}>
-        <button className="btn btn-success" onClick={this._onClick}>Proceed to checkout</button>
+        <button className="btn btn-warning col-xs-12 " onClick={this._onClick}>
+          <span className="glyphicon glyphicon-shopping-cart"> </span>
+          &nbsp; Proceed to checkout
+        </button>
       </ModalTrigger>
     )
   },
   _getConsole() {
     return <div className="well panel panel-success ">
       <p>{"Subtotal ({} item)".format(this.state.numberOfItems)}</p>
-      <h2 className="panel-heading">{"{}".format(numbr(this.state.total).format('£0,0.00')) }</h2>
+      <div className="panel-heading">{"{}".format(numbr(this.state.total).format('£0,0.00')) }</div>
     </div>
   },
   _renderItem() {
     return this.state.items.map(item => {
-      return <KartProduct item={item} />
+      return <BasketItem item={item} />
     })
   },
   _onChange() {
@@ -76,5 +79,5 @@ var KartList = React.createClass({
   }
 });
 
-export default KartList;
+export default BasketList;
 

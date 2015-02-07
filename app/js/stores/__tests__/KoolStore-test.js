@@ -1,8 +1,7 @@
 jest.dontMock('../../constants/KartConstants');
-jest.dontMock('../KoolStore');
 jest.dontMock('react/lib/merge');
 
-describe('KoolStore', function() {
+describe('ProductsStore', function() {
   beforeEach(function() {
     var AppDispatcher = require('../../dispatcher/AppDispatcher');
   });
