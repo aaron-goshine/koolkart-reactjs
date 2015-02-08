@@ -2,6 +2,7 @@ import React from 'react';
 import ProductsStore from '../stores/ProductsStore';
 import ProductComponent from '../components/ProductComponent';
 import  _ from 'lodash';
+import  {ButtonGroup, MenuItem ,DropdownButton,Button } from 'react-bootstrap'
 
 var ProductsPanel = React.createClass({
   getInitialState() {
@@ -16,9 +17,18 @@ var ProductsPanel = React.createClass({
   render() {
     return (
       <div className="panel-custom">
-        <header className="panel-header">
-          <p><strong>Inspired by Your Shopping Trends</strong></p>
-          <p>Your Recently Viewed Items and Featured Recommendations</p>
+        <header className="main-header">
+          <ButtonGroup>
+            <DropdownButton eventKey={3} onClick={this._renderItems} title="Sort By:">
+              <MenuItem eventKey="1">title</MenuItem>
+              <MenuItem eventKey="2">price</MenuItem>
+              <MenuItem eventKey="3">rating</MenuItem>
+            </DropdownButton>
+            <Button>List</Button>
+            <Button>Grid</Button>
+          </ButtonGroup>
+
+
         </header>
         {this._renderItems()}
       </div>
@@ -33,8 +43,10 @@ var ProductsPanel = React.createClass({
         })}</div>
     })
   },
+  _dropdownButtonOnClick() {
+ alert("hello");
+  },
   _onChange() {
-    console.log("the store have changed");
     this.setState(this._getStateFromStore());
   },
   _getStateFromStore() {
