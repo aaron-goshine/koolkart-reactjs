@@ -1,18 +1,39 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var KartConstants = require('../constants/KartConstants');
-
 var _ = require('lodash');
 
 var CHANGE_EVENT = 'change';
-var _Items = [];
+var _state = {
+  items: [],
+  view:  KartConstants.SELECT_TABLE_VIEW,
+  sort: null
+};
 
-var KoolStore = _.assign(new EventEmitter, {
+
+function setItems(items) {
+  _state.items = items;
+}
+
+function setView(name) {
+  _state.view = name;
+}
+
+function sortItems(index) {
+  var keyMap = [null,"title","price","rating"];
+  _state.sort = keyMap[index];
+  _state.items = _.sortBy(_state.items,keyMap[index]);
+}
+
+var ProductsStore = _.assign(new EventEmitter, {
+  getState() {
+    return _state;
+  },
   getAll() {
-    return _Items;
+    return _state.items;
   },
   getItemById(id) {
-    return _.filter(_Items, {id: id})[0];
+    return _.filter(_state.items, {id: id})[0];
   },
   emitChange() {
     this.emit(CHANGE_EVENT);
@@ -29,12 +50,24 @@ var KoolStore = _.assign(new EventEmitter, {
 AppDispatcher.register((payload) => {
   var action = payload.action;
   switch (action.actionType) {
+    case KartConstants.SELECT_LIST_VIEW :
+      setView(KartConstants.SELECT_LIST_VIEW);
+      ProductsStore.emitChange();
+      break;
+    case KartConstants.SELECT_TABLE_VIEW:
+      setView(KartConstants.SELECT_TABLE_VIEW);
+      ProductsStore.emitChange();
+      break;
+    case KartConstants.SORT_BY_KEY :
+      sortItems(action.index);
+      ProductsStore.emitChange();
+      break;
     case KartConstants.INIT:
-      _Items = action.data;
-      KoolStore.emitChange();
+      setItems(action.data);
+      ProductsStore.emitChange();
       break;
   }
   return true;
 });
 
-module.exports = KoolStore;
+module.exports = ProductsStore;

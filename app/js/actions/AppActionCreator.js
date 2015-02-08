@@ -4,11 +4,11 @@ import reqwest  from 'reqwest';
 
 var KoolActions = {
   init() {
-   reqwest({
+    reqwest({
       url: '/mock/data.json'
       , method: 'get'
       , data: [{name: 'test', value: 1}]
-      , success: function(resp) {
+      , success: function (resp) {
         AppDispatcher.handleServerAction({
           actionType: KartConstants.INIT,
           data: resp
@@ -33,6 +33,22 @@ var KoolActions = {
     AppDispatcher.handleViewAction({
       actionType: KartConstants.REMOVE_FROM_KART,
       id: id
+    });
+  },
+  selectListView() {
+    AppDispatcher.handleViewAction({
+      actionType: KartConstants.SELECT_LIST_VIEW
+    });
+  },
+  selectTableView() {
+    AppDispatcher.handleViewAction({
+      actionType: KartConstants.SELECT_TABLE_VIEW
+    });
+  },
+  sortBykey(index) {
+    AppDispatcher.handleViewAction({
+      actionType: KartConstants.SORT_BY_KEY,
+      index: index
     });
   }
 };
