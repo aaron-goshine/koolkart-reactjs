@@ -39,10 +39,6 @@ var ProductsPanel = React.createClass({
     )
   },
   _renderItems() {
-    console.log(">>===============|>>");
-    console.log(this.state.viewType);
-    console.log(KartConstants.SELECT_LIST_VIEW);
-    console.log(">>===============|>>");
     switch (this.state.viewType) {
       case KartConstants.SELECT_TABLE_VIEW:
        return this._renderTable();
@@ -66,7 +62,7 @@ var ProductsPanel = React.createClass({
   _renderList() {
     return this.state.items.map(item => {
       return <div className="row">
-        <ProductComponent  className="col-xs-4 product-unit" item={item} />
+        <ProductComponent  className="col-xs-12 product-unit" item={item} />
       </div>
     })
   },

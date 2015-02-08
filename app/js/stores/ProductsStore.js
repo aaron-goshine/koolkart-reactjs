@@ -20,7 +20,7 @@ function setView(name) {
 }
 
 function sortItems(index) {
-  var keyMap = [null,"title","price","rating"];
+  var keyMap = [null,"title","value","rating"];
   _state.sort = keyMap[index];
   _state.items = _.sortBy(_state.items,keyMap[index]);
 }
