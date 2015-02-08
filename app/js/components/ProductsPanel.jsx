@@ -19,16 +19,18 @@ var ProductsPanel = React.createClass({
       <div className="panel-custom">
         <header className="main-header">
           <ButtonGroup>
-            <DropdownButton eventKey={3} onClick={this._renderItems} title="Sort By:">
+            <DropdownButton eventKey={3} onSelect={this._onSelectDown} title="Sort By:">
               <MenuItem eventKey="1">title</MenuItem>
               <MenuItem eventKey="2">price</MenuItem>
               <MenuItem eventKey="3">rating</MenuItem>
             </DropdownButton>
-            <Button>List</Button>
-            <Button>Grid</Button>
+            <Button onClick={this._onSelectListView}>
+              <span className="glyphicon glyphicon-th-list"></span>
+            </Button>
+            <Button onClick={this._onSelectListTable} >
+              <span className="glyphicon glyphicon-th"></span>
+            </Button>
           </ButtonGroup>
-
-
         </header>
         {this._renderItems()}
       </div>
@@ -43,8 +45,14 @@ var ProductsPanel = React.createClass({
         })}</div>
     })
   },
-  _dropdownButtonOnClick() {
- alert("hello");
+  _onSelectListView(event) {
+    console.log(event);
+  },
+  _onSelectListTable(event) {
+    console.log(event);
+  },
+  __onSelectDown(event) {
+    console.log(event);
   },
   _onChange() {
     this.setState(this._getStateFromStore());
