@@ -1,4 +1,4 @@
-jest.dontMock('../../constants/KartConstants');
+jest.dontMock('../../constants/AppConstants');
 jest.dontMock('react/lib/merge');
 
 describe('ProductsStore', function() {

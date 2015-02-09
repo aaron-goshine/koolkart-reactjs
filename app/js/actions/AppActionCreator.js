@@ -1,16 +1,16 @@
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import KartConstants from '../constants/KartConstants';
-import reqwest  from 'reqwest';
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppConstants = require('../constants/AppConstants');
+var reqwest = require('reqwest');
 
-var KoolActions = {
+var AppActions = {
   init() {
     reqwest({
       url: '/mock/data.json'
       , method: 'get'
       , data: [{name: 'test', value: 1}]
-      , success: function (resp) {
+      , success: function(resp) {
         AppDispatcher.handleServerAction({
-          actionType: KartConstants.INIT,
+          actionType: AppConstants.INIT,
           data: resp
         });
       }
@@ -19,38 +19,38 @@ var KoolActions = {
   },
   addToKart(item) {
     AppDispatcher.handleViewAction({
-      actionType: KartConstants.ADD_TO_KART,
+      actionType: AppConstants.ADD_TO_KART,
       item: item
     });
   },
   removeItemFromKart(id) {
     AppDispatcher.handleViewAction({
-      actionType: KartConstants.REMOVE_ITEM_FROM_KART,
+      actionType: AppConstants.REMOVE_ITEM_FROM_KART,
       id: id
     });
   },
   removeAllItemsFromKart(id) {
     AppDispatcher.handleViewAction({
-      actionType: KartConstants.REMOVE_FROM_KART,
+      actionType: AppConstants.REMOVE_FROM_KART,
       id: id
     });
   },
   selectListView() {
     AppDispatcher.handleViewAction({
-      actionType: KartConstants.SELECT_LIST_VIEW
+      actionType: AppConstants.SELECT_LIST_VIEW
     });
   },
   selectTableView() {
     AppDispatcher.handleViewAction({
-      actionType: KartConstants.SELECT_TABLE_VIEW
+      actionType: AppConstants.SELECT_TABLE_VIEW
     });
   },
   sortBykey(index) {
     AppDispatcher.handleViewAction({
-      actionType: KartConstants.SORT_BY_KEY,
+      actionType: AppConstants.SORT_BY_KEY,
       index: index
     });
   }
 };
 
-export default KoolActions;
+module.exports = AppActions;

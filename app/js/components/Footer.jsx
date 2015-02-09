@@ -1,7 +1,6 @@
-import React from 'react';
+var React = require('react');
 
 var Footer = React.createClass({
-
   render() {
     return (
       <footer className="footer panel-footer">
@@ -9,8 +8,7 @@ var Footer = React.createClass({
       </footer>
     );
   }
-
 });
 
-export default Footer;
+module.exports = Footer;
 

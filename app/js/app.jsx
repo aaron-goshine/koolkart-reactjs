@@ -1,9 +1,9 @@
-import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ProductsPanel from './components/ProductsPanel';
-import BasketList from './components/BasketList';
-import AppActionCreator from './actions/AppActionCreator'
+var React = require('react');
+var Header = require('./components/Header');
+var Footer  = require('./components/Footer');
+var ProductsPanel  = require('./components/ProductsPanel');
+var BasketList  = require('./components/BasketList');
+var AppActionCreator  = require('./actions/AppActionCreator');
 
 var App = React.createClass({
   componentDidMount() {
@@ -26,3 +26,6 @@ React.render(
   document.getElementById('main-app')
 );
 
+//<ProductsPanel/>
+//<BasketList/>
+//<Footer/>

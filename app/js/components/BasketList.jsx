@@ -1,20 +1,20 @@
-import React from 'react'
-import KartStore from '../stores/KartStore';
-import ProductComponent from '../components/ProductComponent';
-import 'string-format';
-import numbr from 'numbr'
-import  {ModalTrigger,Modal} from 'react-bootstrap'
+var React = require('react');
+var BasketStore = require('../stores/BasketStore');
+var ProductComponent = require('../components/ProductComponent');
+var numberUtil = require('numbr');
+var Modal = require('react-bootstrap').Modal;
+var ModalTrigger = require('react-bootstrap').ModalTrigger;
+require('string-format');
 
-
-var BasketList= React.createClass({
+var BasketList = React.createClass({
   getInitialState() {
     return this._getStateFromStore();
   },
   componentWillMount() {
-    KartStore.addChangeListener(this._onChange);
+    BasketStore.addChangeListener(this._onChange);
   },
   componentWillUnmount() {
-    KartStore.removeChangeListener(this._onChange);
+    BasketStore.removeChangeListener(this._onChange);
   },
   render() {
     return (
@@ -32,16 +32,18 @@ var BasketList= React.createClass({
       <ModalTrigger modal={this._getModal()} container={this}>
         <button className="btn btn-warning col-xs-12 " onClick={this._onClick}>
           <span className="glyphicon glyphicon-shopping-cart"> </span>
-          &nbsp; Proceed to checkout
+        &nbsp; Proceed to checkout
         </button>
       </ModalTrigger>
     )
   },
   _getConsole() {
-    return <div className="well panel panel-success ">
-      <p>{"Subtotal ({} item)".format(this.state.numberOfItems)}</p>
-      <div className="panel-heading">{"{}".format(numbr(this.state.total).format('£0,0.00')) }</div>
-    </div>
+    return (
+      <div className="well panel panel-success ">
+        <p>{"Subtotal ({} item)".format(this.state.numberOfItems)}</p>
+        <div className="panel-heading">{"{}".format(numberUtil(this.state.total).format('£0,0.00')) }</div>
+      </div>
+    )
   },
   _renderItem() {
     return this.state.items.map(item => {
@@ -62,21 +64,20 @@ var BasketList= React.createClass({
   },
   _getStateFromStore() {
     function numOfItems() {
-      var items = KartStore.getAll(),
+      var items = BasketStore.getAll(),
         num = 0;
       for (var i = 0; i < items.length; i++) {
         num += Number(items[i].quantity);
       }
       return num;
     }
-
     return {
-      items: KartStore.getAll(),
-      total: KartStore.getTotalCost(),
+      items: BasketStore.getAll(),
+      total: BasketStore.getTotalCost(),
       numberOfItems: numOfItems()
     }
   }
 });
 
-export default BasketList;
+module.exports = BasketList;
 

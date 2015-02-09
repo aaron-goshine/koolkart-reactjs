@@ -1,15 +1,14 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var KartConstants = require('../constants/KartConstants');
+var AppConstants = require('../constants/AppConstants');
 var _ = require('lodash');
 
 var CHANGE_EVENT = 'change';
 var _state = {
   items: [],
-  view:  KartConstants.SELECT_TABLE_VIEW,
-  sort: null
+  view:  AppConstants.SELECT_TABLE_VIEW,
+  sortedBy: ''
 };
-
 
 function setItems(items) {
   _state.items = items;
@@ -20,8 +19,8 @@ function setView(name) {
 }
 
 function sortItems(index) {
-  var keyMap = [null,"title","value","rating"];
-  _state.sort = keyMap[index];
+  var keyMap = ["title","value","rating"];
+  _state.sortedBy = keyMap[index];
   _state.items = _.sortBy(_state.items,keyMap[index]);
 }
 
@@ -50,19 +49,19 @@ var ProductsStore = _.assign(new EventEmitter, {
 AppDispatcher.register((payload) => {
   var action = payload.action;
   switch (action.actionType) {
-    case KartConstants.SELECT_LIST_VIEW :
-      setView(KartConstants.SELECT_LIST_VIEW);
+    case AppConstants.SELECT_LIST_VIEW :
+      setView(AppConstants.SELECT_LIST_VIEW);
       ProductsStore.emitChange();
       break;
-    case KartConstants.SELECT_TABLE_VIEW:
-      setView(KartConstants.SELECT_TABLE_VIEW);
+    case AppConstants.SELECT_TABLE_VIEW:
+      setView(AppConstants.SELECT_TABLE_VIEW);
       ProductsStore.emitChange();
       break;
-    case KartConstants.SORT_BY_KEY :
+    case AppConstants.SORT_BY_KEY :
       sortItems(action.index);
       ProductsStore.emitChange();
       break;
-    case KartConstants.INIT:
+    case AppConstants.INIT:
       setItems(action.data);
       ProductsStore.emitChange();
       break;

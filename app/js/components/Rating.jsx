@@ -1,9 +1,12 @@
-import React from 'react';
+var React = require('react');
 
 var Rating = React.createClass({
+  propTypes: {
+    score: React.PropTypes.number.isRequired
+  },
   render() {
     var rating = this.props.score / 5 * 100;
-    var mask = {width : rating+"%"};
+    var mask = {width: rating + "%"};
     return (
       <div className="star">
         <div className="mask-bg">
@@ -26,6 +29,5 @@ var Rating = React.createClass({
 
 });
 
-
-export default Rating;
+module.exports = Rating;
 

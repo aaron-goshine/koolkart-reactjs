@@ -1,13 +1,16 @@
-import React from 'react';
-import AppActionCreator from '../actions/AppActionCreator';
-import format from 'string-format';
-import ProductsStore from '../stores/ProductsStore';
-import Rating from './Rating';
-import _ from 'lodash';
-import 'string-format';
-import numbr from 'numbr';
+var React = require('react');
+var AppActionCreator = require('../actions/AppActionCreator');
+var ProductsStore = require('../stores/ProductsStore');
+var Rating = require('./Rating');
+var _ = require('lodash');
+var numberUtil = require('numbr');
+require('string-format');
 
 var ProductComponent = React.createClass({
+  propTypes: {
+    renderType: React.PropTypes.string,
+    item: React.PropTypes.object
+  },
   render() {
     switch (this.props.renderType) {
       case "table":
@@ -40,7 +43,7 @@ var ProductComponent = React.createClass({
           <li>
           {"({}) customer reviews".format(item.ratings)}
           </li>
-          <li>{"Price : {}".format(numbr(item.value).format('£0,0.00'))}</li>
+          <li>{"Price : {}".format(numberUtil(item.value).format('£0,0.00'))}</li>
         </ul>
         <button className="btn btn-success" onClick={this._onClick}>Add to Basket </button>
       </div>
@@ -53,7 +56,9 @@ var ProductComponent = React.createClass({
         <img  className="col-xs-4 constrained-w" src={item.image} title={item.title}/>
 
         <ul className="col-xs-7" >
-          <li><strong>{ item.title}</strong></li>
+          <li>
+            <strong>{ item.title}</strong>
+          </li>
           <li>
             By: {item.authors}
           </li>
@@ -66,7 +71,7 @@ var ProductComponent = React.createClass({
           <li>
           {"({}) customer reviews".format(item.ratings)}
           </li>
-          <li>{"Price : {}".format(numbr(item.value).format('£0,0.00'))}</li>
+          <li>{"Price : {}".format(numberUtil(item.value).format('£0,0.00'))}</li>
         </ul>
         <button className="btn btn-success" onClick={this._onClick}>Add to Basket </button>
       </div>
@@ -78,7 +83,7 @@ var ProductComponent = React.createClass({
       <div id={"{}-basket".format(item.id)} title={item.title} className="product-item fade-in">
         <span className="close glyphicon glyphicon-remove-circle"  onClick={this._onClickRemoveAll} title="Remove all"></span>
         <ul>
-          <li>{"Price : {}".format(numbr(item.value).format('£0,0.00'))}</li>
+          <li>{"Price : {}".format(numberUtil(item.value).format('£0,0.00'))}</li>
           <li>{"({}) {}".format(item.quantity, item.title)}</li>
         </ul>
         <a className="btn-link-custom" onClick={this._onClickRemoveItem} title="Remove one">Remove item</a>
@@ -97,4 +102,4 @@ var ProductComponent = React.createClass({
   }
 });
 
-export default  ProductComponent;
+module.exports = ProductComponent;

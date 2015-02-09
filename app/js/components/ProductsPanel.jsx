@@ -1,10 +1,13 @@
-import React from 'react';
-import ProductsStore from '../stores/ProductsStore';
-import AppActionCreator from '../actions/AppActionCreator';
-import ProductComponent from '../components/ProductComponent';
-import KartConstants from '../constants/KartConstants';
-import  _ from 'lodash';
-import  {ButtonGroup, MenuItem ,DropdownButton,Button } from 'react-bootstrap'
+var React = require('react');
+var ProductsStore = require('../stores/ProductsStore');
+var AppActionCreator = require('../actions/AppActionCreator');
+var ProductComponent = require('../components/ProductComponent');
+var AppConstants = require('../constants/AppConstants');
+var ButtonGroup = require('react-bootstrap').ButtonGroup;
+var MenuItem = require('react-bootstrap').MenuItem;
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var Button = require('react-bootstrap').Button;
+var _ = require('lodash');
 
 var ProductsPanel = React.createClass({
   getInitialState() {
@@ -21,10 +24,10 @@ var ProductsPanel = React.createClass({
       <div className="panel-custom">
         <header className="main-header">
           <ButtonGroup>
-            <DropdownButton  onSelect={this._onSelectDropdown} title="Sort By:">
-              <MenuItem eventKey="1">title</MenuItem>
-              <MenuItem eventKey="2">price</MenuItem>
-              <MenuItem eventKey="3">rating</MenuItem>
+            <DropdownButton  onSelect={this._onSelectDropdown} title={"Sorted by : {}".format(this.state.sortedBy)}>
+              <MenuItem eventKey="0">title</MenuItem>
+              <MenuItem eventKey="1">value</MenuItem>
+              <MenuItem eventKey="2">rating</MenuItem>
             </DropdownButton>
             <Button onClick={this._onSelectListView}>
               <span className="glyphicon glyphicon-th-list"></span>
@@ -40,14 +43,13 @@ var ProductsPanel = React.createClass({
   },
   _renderItems() {
     switch (this.state.viewType) {
-      case KartConstants.SELECT_TABLE_VIEW:
-       return this._renderTable();
+      case AppConstants.SELECT_TABLE_VIEW:
+        return this._renderTable();
         break;
-      case KartConstants.SELECT_LIST_VIEW:
+      case AppConstants.SELECT_LIST_VIEW:
         return this._renderList();
         break;
     }
-
   },
   _renderTable() {
     var table = _.chunk(this.state.items, 3);
@@ -61,9 +63,11 @@ var ProductsPanel = React.createClass({
   },
   _renderList() {
     return this.state.items.map(item => {
-      return <div className="row">
-        <ProductComponent renderType="list" className="col-xs-12 product-unit" item={item} />
-      </div>
+      return (
+        <div className="row">
+          <ProductComponent renderType="list" className="col-xs-12 product-unit" item={item} />
+        </div>
+      )
     })
   },
   _onSelectListView() {
@@ -81,10 +85,11 @@ var ProductsPanel = React.createClass({
   _getStateFromStore() {
     return {
       items: ProductsStore.getAll(),
-      viewType: ProductsStore.getState().view
+      viewType: ProductsStore.getState().view,
+      sortedBy :  ProductsStore.getState().sortedBy
     }
   }
 });
 
 
-export default   ProductsPanel;
+module.exports = ProductsPanel;
