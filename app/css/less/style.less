@@ -37,8 +37,8 @@ Catalogue
 ======================================================
 */
 
-.main-header{
- padding: 20px 0px;
+.main-header {
+  padding: 20px 0px;
 
 }
 
@@ -55,39 +55,54 @@ Catalogue
 }
 
 .product-unit {
-font-size: 12px;
+  font-size: 12px;
   padding-right: 0px !important;
   .inner {
     .panel;
-    padding: 10px;
+    padding: 15px;
     min-height: 300px;
   }
-  img {
+  .inner-list{
+    .panel;
+    padding: 20px 10px;
+    min-height: 240px;
+    ul{
+      padding: 0px;
+    }
+  }
+
+  img.constrained-h {
     height: 100px;
     display: block;
     margin: 10px auto;
   }
+
+  img.constrained-w {
+    display: block;
+    margin-right: 10px;
+  }
 }
 
-.star{
+.star {
   width: 76px;
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
   font-size: 15px;
 
   .mask {
-    overflow:hidden;
+    overflow: hidden;
     text-overflow: clip;
     white-space: nowrap;
     color: orange;
   }
-  .mask-bg{
+  .mask-bg {
     top: 0px;
     width: 76px;
     position: absolute;
     color: #e7e7e7;
   }
 }
+
 /*
 ======================================================
   BasketList
@@ -97,7 +112,7 @@ font-size: 12px;
 .kart-list {
   .panel-default;
   .col-xs-3;
-  padding-top: 60px;
+  padding-top: 75px;
   .product-item {
     margin-bottom: 15px;
   }

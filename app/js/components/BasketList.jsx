@@ -1,6 +1,6 @@
 import React from 'react'
 import KartStore from '../stores/KartStore';
-import BasketItem from '../components/BasketItem';
+import ProductComponent from '../components/ProductComponent';
 import 'string-format';
 import numbr from 'numbr'
 import  {ModalTrigger,Modal} from 'react-bootstrap'
@@ -24,7 +24,6 @@ var BasketList= React.createClass({
         {this._renderItem()}
         </div>
         {(this.state.numberOfItems > 0 ) ? this._getCheckoutButton() : ""}
-
       </div>
     )
   },
@@ -46,7 +45,7 @@ var BasketList= React.createClass({
   },
   _renderItem() {
     return this.state.items.map(item => {
-      return <BasketItem item={item} />
+      return <ProductComponent renderType="basket" item={item} />
     })
   },
   _onChange() {

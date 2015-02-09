@@ -54,7 +54,7 @@ var ProductsPanel = React.createClass({
     return table.map(item => {
       return <div className="row"> {
         item.map(unit => {
-          return <ProductComponent  className="col-xs-4 product-unit" item={unit} />;
+          return <ProductComponent renderType="table" className="col-xs-4 product-unit" item={unit} />;
         })
         }</div>
     })
@@ -62,7 +62,7 @@ var ProductsPanel = React.createClass({
   _renderList() {
     return this.state.items.map(item => {
       return <div className="row">
-        <ProductComponent  className="col-xs-12 product-unit" item={item} />
+        <ProductComponent renderType="list" className="col-xs-12 product-unit" item={item} />
       </div>
     })
   },
