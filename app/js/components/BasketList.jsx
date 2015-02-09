@@ -55,7 +55,7 @@ var BasketList = React.createClass({
   },
   _getModal() {
     return (
-      <Modal {...this.props} title='Your purchase was successful' animation>
+      <Modal {...this.props}  className="col-xs-6" title='Your purchase was successful' animation>
         <div className="panel">
           <h3 className="panel-heading">Thank You</h3>
         </div>
